@@ -1,0 +1,41 @@
+---
+title: "Data 211 Final Project Water Consumption"
+author: "SJ Zimmermann"
+date: "2023-11-29"
+output:
+  word_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+library(dplyr)
+library(readxl)
+library(ggplot2)
+
+#sj_water_consumption <- read_excel("Data 211/sj water consumption.xlsx")
+#View(sj_water_consumption)
+
+water_chart<-ggplot(data=sj_water_consumption,aes(y=Water_consumed_in_ounces,x=Day))+geom_bar(stat = "identity",fill="blue")+labs(x="Day",y="Water consumed in ounces")
+
+water_chart
+```
+The T-Test
+```{r}
+t.test(x=sj_water_consumption$Water_consumed_in_ounces, mu=64,alternative="less")
+```
+
+$H_0: \mu=64 ounces$
+$H_a: \mu<64 ounces$ 
+p-value= 0.0006986
+
+P-value is 0.0006986 which is lower that the sinificance level .05, therefore we reject the null hypothesis.
+
+There is sufficient evidence to conclude that mean water consumption is less than 64 ounces.
+
+Mean water consumption is 44 ounces which is 20 less than the recommended water consumption.
